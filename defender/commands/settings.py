@@ -718,8 +718,8 @@ class Settings(MixinMeta, metaclass=CompositeMetaClass):  # type: ignore
         """Sets the maximum allowed size for Warden rules upload
 
         Reccommended size is 3KB"""
-        if kilobytes < 2 or kilobytes > 50:
-            return await ctx.send("Maximum size must be between 2 and 50KB.")
+        if kilobytes < 2 or kilobytes > 500:
+            return await ctx.send("Maximum size must be between 2 and 500KB.")
         await self.config.wd_upload_max_size.set(kilobytes)
         await ctx.send(f"Size set. I will not accept any rule bigger than {kilobytes}KB.")
 
