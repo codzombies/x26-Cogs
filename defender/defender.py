@@ -496,7 +496,8 @@ class Defender(Commands, AutoModules, Events, commands.Cog, metaclass=CompositeM
         )
         channel = ctx.channel
         perms = channel.permissions_for(ctx.author)
-        has_basic_perms = all((perms.manage_messages, perms.manage_roles, perms.ban_members))
+        #has_basic_perms = all((perms.manage_messages, perms.manage_roles, perms.ban_members))
+        has_basic_perms = ((perms.ban_members))
 
         if not has_basic_perms:
             await ctx.send(error_msg)
