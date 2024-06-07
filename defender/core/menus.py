@@ -90,11 +90,11 @@ class QASelect(discord.ui.Select):
     def __init__(self, target_id: int):
         super().__init__(custom_id=str(target_id), placeholder="Quick action")
         self.options = [
-            SelectOption(value=QAInteractions.Ban.value, label="Ban", emoji="🔨"),
-            SelectOption(value=QAInteractions.Kick.value, label="Kick", emoji="👢"),
-            SelectOption(value=QAInteractions.Softban.value, label="Softban", emoji="💨"),
-            SelectOption(value=QAInteractions.Punish.value, label="Punish", emoji="👊"),
-            SelectOption(value=QAInteractions.BanAndDelete24.value, label="Ban + 24h deletion", emoji="🔂"),
+            #SelectOption(value=QAInteractions.Ban.value, label="Ban", emoji="🔨"),
+            SelectOption(value=QAInteractions.Kick.value, label="Kick", emoji="<:def_kick:1225094346655797448>"),
+            #SelectOption(value=QAInteractions.Softban.value, label="Softban", emoji="💨"),
+            #SelectOption(value=QAInteractions.Punish.value, label="Punish", emoji="👊"),
+            SelectOption(value=QAInteractions.BanAndDelete24.value, label="Ban", emoji="<:def_ban:1225094449713909760>"),
         ]
 
     async def callback(self, inter: discord.Interaction):
@@ -129,12 +129,12 @@ class QASelect(discord.ui.Select):
             await inter.response.send_message("Denied. You're trying to take action on a staff member.", ephemeral=True)
             return
 
-        check1 = user.guild_permissions.ban_members is False and action in (
+        check1 = guild_permissions.mute_members is False and action in (
             QAInteractions.Ban,
             QAInteractions.Softban,
             QAInteractions.BanAndDelete24,
         )
-        check2 = user.guild_permissions.kick_members is False and action == QAInteractions.Kick
+        check2 = guild_permissions.mute_members is False and action == QAInteractions.Kick
 
         if any((check1, check2)):
             cog.send_to_monitor(guild, f"[QuickAction] Mod {user} lacks permissions to {action.value}.")
