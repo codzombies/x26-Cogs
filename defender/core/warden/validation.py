@@ -139,7 +139,7 @@ class HTimeDelta(TimeDelta):
 
     @classmethod
     def __get_pydantic_core_schema__(cls, source_type: Any, handler: GetCoreSchemaHandler) -> CoreSchema:
-        func = partial(cls.parse_td, min=timedelta(seconds=1), max=timedelta(hours=24))
+        func = partial(cls.parse_td, min=timedelta(seconds=1), max=timedelta(hours=72))
         return core_schema.no_info_plain_validator_function(function=func)
 
 
@@ -161,7 +161,7 @@ class DeleteLastMessageSentAfterTimeDelta(TimeDelta):
 
     @classmethod
     def __get_pydantic_core_schema__(cls, source_type: Any, handler: GetCoreSchemaHandler) -> CoreSchema:
-        func = partial(cls.parse_td, min=timedelta(seconds=1), max=timedelta(minutes=15))
+        func = partial(cls.parse_td, min=timedelta(seconds=1), max=timedelta(hours=24))
         return core_schema.no_info_plain_validator_function(function=func)
 
 
