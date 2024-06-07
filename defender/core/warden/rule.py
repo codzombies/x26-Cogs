@@ -295,14 +295,14 @@ class WardenRule:
             try:
                 td = parse_timedelta(
                     str(rule["run-every"]),
-                    maximum=datetime.timedelta(hours=24),
-                    minimum=datetime.timedelta(minutes=5),
+                    maximum=datetime.timedelta(hours=72),
+                    minimum=datetime.timedelta(minutes=1),
                     allowed_units=["hours", "minutes"],
                 )
                 if td is None:
                     raise BadArgument()
             except BadArgument:
-                raise InvalidRule("The 'run-every' parameter must be between 5 minutes " "and 24 hours.")
+                raise InvalidRule("The 'run-every' parameter must be between 1 minute(s) " "and 72 hours.")
             else:
                 self.run_every = td
                 self.next_run = utcnow() + td
