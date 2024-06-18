@@ -129,12 +129,12 @@ class QASelect(discord.ui.Select):
             await inter.response.send_message("Denied. You're trying to take action on a staff member.", ephemeral=True)
             return
 
-        check1 = guild_permissions.mute_members is False and action in (
+        check1 = user.guild_permissions.mute_members is False and action in (
             QAInteractions.Ban,
             QAInteractions.Softban,
             QAInteractions.BanAndDelete24,
         )
-        check2 = guild_permissions.mute_members is False and action == QAInteractions.Kick
+        check2 = user.guild_permissions.mute_members is False and action == QAInteractions.Kick
 
         if any((check1, check2)):
             cog.send_to_monitor(guild, f"[QuickAction] Mod {user} lacks permissions to {action.value}.")
