@@ -121,7 +121,7 @@ default_owner_settings = {
 class Defender(Commands, AutoModules, Events, commands.Cog, metaclass=CompositeMetaClass):
     """Security tools to protect communities"""
 
-    __version__ = "2.1.2-etn"
+    __version__ = "2.1.2-etn_1.1"
 
     def __init__(self, bot):
         self.bot = bot
@@ -489,7 +489,7 @@ class Defender(Commands, AutoModules, Events, commands.Cog, metaclass=CompositeM
             return False
         error_msg = (
             "You have the role of Administrator at bot level, but you do not have "
-            "the permission to mute members. This fork of Defender requires that "
+            "the permission to timeout members. This version of Defender requires that "
             "both conditions be met, prior to being allowed to upload a rule."
         )
         channel = ctx.channel
