@@ -489,13 +489,13 @@ class Defender(Commands, AutoModules, Events, commands.Cog, metaclass=CompositeM
             return False
         error_msg = (
             "You have the role of Administrator at bot level, but you do not have "
-            "the permission to mute members. This fork of Defender requires that"
+            "the permission to mute members. This fork of Defender requires that "
             "both conditions be met, prior to being allowed to upload a rule."
         )
         channel = ctx.channel
         perms = channel.permissions_for(ctx.author)
         #has_basic_perms = all((perms.manage_messages, perms.manage_roles, perms.ban_members))
-        has_basic_perms = ((perms.mute_members))
+        has_basic_perms = ((perms.moderate_members))
 
         if not has_basic_perms:
             await ctx.send(error_msg)
