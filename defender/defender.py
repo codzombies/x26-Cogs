@@ -121,7 +121,7 @@ default_owner_settings = {
 class Defender(Commands, AutoModules, Events, commands.Cog, metaclass=CompositeMetaClass):
     """Security tools to protect communities"""
 
-    __version__ = "2.1.2-etn"
+    __version__ = "2.1.2-etn_1.1"
 
     def __init__(self, bot):
         self.bot = bot
@@ -488,16 +488,14 @@ class Defender(Commands, AutoModules, Events, commands.Cog, metaclass=CompositeM
             # User is just checking out the help
             return False
         error_msg = (
-            "It seems that you have a role that is considered admin at bot level but "
-            "not the basic permissions that one would reasonably expect an admin to have.\n"
-            "To use these commands, other than the admin role, you need `administrator` "
-            "permissions OR `manage messages` + `manage roles` + `ban member` permissions.\n"
-            "I cannot let you proceed until you properly configure permissions in this server."
+            "You have the role of Administrator at bot level, but you do not have "
+            "the permission to timeout members. This version of Defender requires that "
+            "both conditions be met, prior to being allowed to upload a rule."
         )
         channel = ctx.channel
         perms = channel.permissions_for(ctx.author)
         #has_basic_perms = all((perms.manage_messages, perms.manage_roles, perms.ban_members))
-        has_basic_perms = ((perms.ban_members))
+        has_basic_perms = ((perms.moderate_members))
 
         if not has_basic_perms:
             await ctx.send(error_msg)
